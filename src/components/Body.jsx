@@ -20,10 +20,8 @@ const Body = () => {
       const res = await axios.get(BASE_URL + "/profile/view", {
       withCredentials: true,
     });
-    // console.log(res.data);
     dispatch(addUser(res.data));
   }catch(err){
-
       navigate("/login");   
       console.error(err);
     }
@@ -35,27 +33,18 @@ const Body = () => {
   }
   },[]);
 
-
-  return (  //   <div>
-  //      <NavBar/>
-  //   {/* Any children routes of Body will render in outlet */}
-  //   {/* Children Routes will be defined under Body in App.jsx file */}
-  //   {/* <div > */}
-  //     <Outlet/>
-  //     <Footer/>
-  //   </div>
-  // )
-  // return (
+  return (
     <div className="flex flex-col min-h-screen">
       <NavBar />
-      <div className="flex-grow overflow-auto">
+      
+      {/* Ensure the content takes up available space */}
+      <div className="flex-grow overflow-scroll mb-10">
         <Outlet />
       </div>
-      <Footer className="mt-auto" />
+      <Footer />
     </div>
-  // );
-
   );
+  
 } 
 
 export default Body;

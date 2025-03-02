@@ -49,16 +49,19 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-      <div className="flex justify-center items-center my-10">
-        <div className="mx-10">
-          <div className="relative bg-base-300 p-6 rounded-lg shadow-lg border border-base-300 w-11/12 sm:w-96">
+    {/* <div className="flex flex-col md:flex-row justify-center items-start gap-6 my-10 px-4"> */}
+
+      <div className="flex flex-col md:flex-row justify-center items-start gap-6 my-10 px-4">
+        {/* Edit Profile Card */}
+        <div className="w-full md:w-1/2 flex justify-around">
+          <div className="relative bg-base-300 p-6 rounded-lg shadow-lg border border-base-300 w-full sm:w-96">
             <fieldset className="fieldset">
               <legend className="fieldset-legend text-lg font-bold">
                 Edit Profile
               </legend>
-
-              <div className="flex flex-row space-x-1.5">
-                <div className="flex flex-col">
+  
+              <div className="flex flex-col sm:flex-row gap-2">
+                <div className="flex flex-col w-full">
                   <label className="fieldset-label mt-2">First Name</label>
                   <input
                     type="text"
@@ -67,10 +70,9 @@ const EditProfile = ({ user }) => {
                     onChange={(e) => setfirstName(e.target.value)}
                   />
                 </div>
-
-                <div className="flex flex-col">
+  
+                <div className="flex flex-col w-full">
                   <label className="fieldset-label mt-2">Last Name</label>
-
                   <input
                     type="text"
                     value={lastName}
@@ -79,7 +81,7 @@ const EditProfile = ({ user }) => {
                   />
                 </div>
               </div>
-
+  
               <label className="fieldset-label mt-2">Age</label>
               <input
                 type="number"
@@ -87,18 +89,18 @@ const EditProfile = ({ user }) => {
                 className="input w-full"
                 onChange={(e) => setAge(e.target.value)}
               />
+  
               <label className="fieldset-label mt-2">Gender</label>
               <select
                 value={gender}
                 onChange={(e) => setgender(e.target.value)}
-                // defaultValue="Select Gender"
                 className="select w-full"
               >
-                {/* <option disabled={true}>Select Gender</option> */}
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="others">Others</option>
               </select>
+  
               <label className="fieldset-label mt-2">About</label>
               <input
                 type="text"
@@ -106,24 +108,21 @@ const EditProfile = ({ user }) => {
                 className="input w-full"
                 onChange={(e) => setabout(e.target.value)}
               />
-              {/* <input
-            type="text"
-            value={gender}
-            className="input w-full"
-            onChange={(e) => setgender(e.target.value)}
-          /> */}
-              <label className="fieldset-label mt-2">photoURL</label>
+  
+              <label className="fieldset-label mt-2">Photo URL</label>
               <input
                 type="text"
                 value={photoURL}
                 className="input w-full"
                 onChange={(e) => setphotoURL(e.target.value)}
               />
+  
               {error && (
                 <div className="flex justify-center">
                   <p className="text-red-500 font-bold">{error}</p>
                 </div>
               )}
+  
               <button
                 className="btn btn-neutral w-full mt-4"
                 onClick={saveProfile}
@@ -133,15 +132,20 @@ const EditProfile = ({ user }) => {
             </fieldset>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center bg-base-300 rounded-lg shadow-lg border border-base-300 w-11/12 sm:w-96">
-          <legend className="fieldset-legend text-lg font-bold text-center ">
-            View Profile Card
-          </legend>
-
-          <TiltedCard user={{ firstName, lastName, about, photoURL, skills }} />
+  
+        {/* View Profile Card */}
+        <div className="w-full md:w-1/2 flex justify-center">
+          <div className="flex flex-col items-center bg-base-300 rounded-lg shadow-lg border border-base-300 w-full sm:w-96 p-6">
+            <legend className="fieldset-legend text-lg font-bold text-center">
+              View Profile Card
+            </legend>
+  
+            <TiltedCard user={{ firstName, lastName, about, photoURL, skills }} />
+          </div>
         </div>
       </div>
-
+  
+      {/* Toast Notification */}
       {showToast && (
         <div className="toast toast-top toast-center">
           <div className="alert alert-success z-10">
@@ -151,6 +155,9 @@ const EditProfile = ({ user }) => {
       )}
     </>
   );
+  
 };
 
 export default EditProfile;
+
+

@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { addUser,removeUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
-import { findSpring } from "framer-motion";
 
 const Login = () => {
   const [emailID, setemailID] = useState("");
