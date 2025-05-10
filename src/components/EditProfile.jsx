@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
+import Footer from "./Footer";
 
 const EditProfile = ({ user }) => {
   const [firstName, setfirstName] = useState(user.firstName);
@@ -49,13 +50,12 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-    {/* <div className="flex flex-col md:flex-row justify-center items-start gap-6 my-10 px-4"> */}
-
-      <div className="flex flex-col md:flex-row justify-center items-start gap-6 my-10 px-4">
-        {/* Edit Profile Card */}
-        <div className="w-full md:w-1/2 flex justify-around">
-          <div className="relative bg-base-300 p-6 rounded-lg shadow-lg border border-base-300 w-full sm:w-96">
-            <fieldset className="fieldset">
+      {/* Main container with proper margins */}
+      <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 mt-10 px-4 mb-4 md:mb-20">
+        {/* Edit Profile Card - Using h-full to match parent height */}
+        <div className="w-full md:w-1/2 flex justify-center">
+          <div className="relative bg-base-300 p-6 rounded-lg shadow-lg border border-base-300 w-full sm:w-96 h-full">
+            <fieldset className="fieldset h-full flex flex-col">
               <legend className="fieldset-legend text-lg font-bold">
                 Edit Profile
               </legend>
@@ -124,7 +124,7 @@ const EditProfile = ({ user }) => {
               )}
   
               <button
-                className="btn btn-neutral w-full mt-4"
+                className="btn btn-neutral w-full mt-auto"
                 onClick={saveProfile}
               >
                 Save Profile
@@ -132,18 +132,26 @@ const EditProfile = ({ user }) => {
             </fieldset>
           </div>
         </div>
-  
-        {/* View Profile Card */}
+
+        {/* View Profile Card - Using h-full to match parent height */}
         <div className="w-full md:w-1/2 flex justify-center">
-          <div className="flex flex-col items-center bg-base-300 rounded-lg shadow-lg border border-base-300 w-full sm:w-96 p-6">
-            <legend className="fieldset-legend text-lg font-bold text-center">
-              View Profile Card
-            </legend>
-  
-            <TiltedCard user={{ firstName, lastName, about, photoURL, skills }} />
+          {/* <div className="flex flex-col items-center bg-amber-700 rounded-lg shadow-lg border border-base-300 w-full sm:w-96 p-6 h-full"> */}
+            <div className="bg-base-300 p-6 rounded-lg shadow-lg border border-base-300 w-full sm:w-96 h-full">
+
+            {/* <div className="flex flex-col bg-blue-950 items-center "> */}
+            <legend className="fieldset-legend text-lg bg-base-300 font-bold text-center w-full rounded-lg p-2">
+              View Profile
+            </legend>  
+            <div className="flex justify-center w-full bg-base-300">
+              <TiltedCard user={{ firstName, lastName, about, photoURL, skills }} />
+            </div>
+            {/* </div> */}
+            </div>
+            
           </div>
         </div>
-      </div>
+
+      {/* </div> */}
   
       {/* Toast Notification */}
       {showToast && (
@@ -153,11 +161,9 @@ const EditProfile = ({ user }) => {
           </div>
         </div>
       )}
+      <Footer/>
     </>
   );
-  
 };
 
 export default EditProfile;
-
-

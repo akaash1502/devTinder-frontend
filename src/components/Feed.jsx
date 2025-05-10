@@ -4,6 +4,8 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
 import TiltedCard from "./TiltedCard";
+import Footer from "./Footer";
+// import { div } from "framer-motion/client";
 
 const Feed = () => {
   const feed = useSelector((store) => 
@@ -41,13 +43,17 @@ const Feed = () => {
   }
 
   return (
-     feed && <div className="h-screen flex justify-center items-center mx-11">
+  feed && <>
+    <div className="flex justify-center items-center mx-11 mt-4 mb-6">
         <TiltedCard user = {feed[0]}/>
-        {/* <div className="m-2 flex flex-wrap items-center justify-around">
-          {feed.map((user) => (TiltedCard({ user })))}          
-        </div>       */}
       </div>
-    )
+      <div className="relative bottom-0">
+      <Footer />
+      </div>
+    
+  </>
+  )
 };
+
 
 export default Feed;
