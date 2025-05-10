@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import LetterGlitch from "./LetterGlitch";
 import { useDispatch } from "react-redux";
 import { addUser,removeUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";

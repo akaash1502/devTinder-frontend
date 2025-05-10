@@ -9,7 +9,6 @@ import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import Home from "./components/Home";
 import Chat from "./components/Chat";
-import LoginSignupPage from "./components/LoginSignupPage";
 
 function App() {
   return (
