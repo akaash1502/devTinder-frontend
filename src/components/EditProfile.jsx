@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TiltedCard from "./TiltedCard";
 import { useDispatch } from "react-redux";
 import axios from "axios";
@@ -12,11 +12,47 @@ const EditProfile = ({ user }) => {
   const [about, setabout] = useState(user.about);
   const [gender, setgender] = useState(user.gender || "");
   const [age, setAge] = useState(user.age || 0);
+
+
   const [photoURL, setphotoURL] = useState(user.photoURL);
+  const [file, setFile] = useState(null);
+
   const [skills, setskills] = useState(user.skills || []);
   const [error, setError] = useState("");
   const [showToast, setshowToast] = useState(false);
   const dispatch = useDispatch();
+
+
+  useEffect( () => {
+    const fetchUser = async () => {
+    const res = await axios.get(`${BASE_URL}/profile/view`,{withCredentials:true});
+    console.log(res);
+    dispatch(addUser(res?.data));
+    }
+    fetchUser();
+
+  },[]);
+
+  const handleUpload = async () => {
+    if(!file){
+      return;
+    }
+    const res = await axios.get(`${BASE_URL}/get-upload-url`, {
+      params : {
+        fileName: file.name,
+        fileType: file.type,
+      }
+    });
+
+    await axios.put(res.data.uploadURL, file, {
+      headers: {
+        "Content-Type":file.type,
+      },
+    });
+
+    setphotoURL(res.data.fileURL);
+
+  };
 
   const saveProfile = async () => {
     //Clear existing errors
@@ -111,11 +147,12 @@ const EditProfile = ({ user }) => {
   
               <label className="fieldset-label mt-2">Photo URL</label>
               <input
-                type="text"
-                value={photoURL}
-                className="input w-full"
-                onChange={(e) => setphotoURL(e.target.value)}
+                type="file"
+                accept="image/*"
+                className="file-input w-full"
+                onChange={(e) => setFile(e.target.files[0])}
               />
+              <button className="btn btn-outline btn-primary" onClick={handleUpload}>Upload</button>
   
               {error && (
                 <div className="flex justify-center">
@@ -124,7 +161,7 @@ const EditProfile = ({ user }) => {
               )}
   
               <button
-                className="btn btn-neutral w-full mt-auto"
+                className="btn btn-neutral w-full mt-4"
                 onClick={saveProfile}
               >
                 Save Profile
@@ -149,9 +186,7 @@ const EditProfile = ({ user }) => {
             </div>
             
           </div>
-        </div>
-
-      {/* </div> */}
+      </div>
   
       {/* Toast Notification */}
       {showToast && (
